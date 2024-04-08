@@ -1,0 +1,52 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Resume {
+  id          Int          @id @default(autoincrement())
+  fullName    String
+  email       String
+  phone       String
+  filePath    String       // Add this line
+  Experience  Experience[] // One-to-many relation
+  Projects    Projects[]   // One-to-many relation
+  Education   Education[]  // One-to-many relation
+  SocialLinks SocialLinks[] // One-to-many relation
+}
+
+model Experience {
+  id        Int     @id @default(autoincrement())
+  resumeId  Int
+  Resume    Resume  @relation(fields: [resumeId], references: [id])
+}
+
+model Projects {
+  id        Int     @id @default(autoincrement())
+  resumeId  Int
+  Resume    Resume  @relation(fields: [resumeId], references: [id])
+}
+
+model Education {
+  id        Int     @id @default(autoincrement())
+  resumeId  Int
+  Resume    Resume  @relation(fields: [resumeId], references: [id])
+}
+
+model SocialLinks {
+  id        Int     @id @default(autoincrement())
+  resumeId  Int
+  link      String
+  platform  String
+  Resume    Resume  @relation(fields: [resumeId], references: [id])
+}
