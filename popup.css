@@ -1,0 +1,65 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #edf2f7;
+    height: 100%;
+}
+
+.container {
+    width: 100%; /* Use the full width of the popup */
+    max-width: 600px; /* Or set a max-width that you prefer */
+    background-color: #fff;
+    padding: 40px; /* Increase padding for better aesthetics */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.title {
+    color: #2b2d42;
+    font-size: 24px; /* Larger font size for the title */
+    margin-bottom: 15px;
+}
+
+.description {
+    color: #8d99ae;
+    font-size: 16px; /* Adjust font size for better readability */
+    margin-bottom: 30px; /* Increase spacing before the buttons */
+}
+
+.file-input {
+    display: none;
+}
+
+.file-label, .upload-btn {
+    font-size: 16px; /* Increase font size for better readability */
+    padding: 15px 30px; /* Increase padding for a larger button */
+    border-radius: 25px; /* Rounded corners for the buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: inline-block; /* Ensure buttons don't stretch full width */
+    margin: 5px; /* Add spacing between buttons */
+}
+
+.file-label {
+    background-color: #4d5bf9; /* A more vibrant color for the select button */
+    color: #ffffff;
+}
+
+.file-label:hover {
+    background-color: #3b4bcc; /* Darken button on hover */
+}
+
+.upload-btn {
+    background-color: #ef233c;
+    color: #ffffff;
+    border: none;
+}
+
+.upload-btn:hover {
+    background-color: #d90429;
+}
