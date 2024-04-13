@@ -9,6 +9,7 @@
   "author": "Abhijit",
   "license": "MIT",
   "dependencies": {
+    "@google/generative-ai": "^0.6.0",
     "@prisma/client": "^5.12.1",
     "cors": "^2.8.5",
     "express": "^4.19.2",

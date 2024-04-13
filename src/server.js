@@ -50,6 +50,7 @@ app.post("/upload", upload.array("files[]"), async (req, res) => {
         return prisma.resume.create({
           data: {
             resumeText: text,
+            fullName: fullName, 
           },
         });
       })
@@ -68,3 +69,7 @@ app.post("/upload", upload.array("files[]"), async (req, res) => {
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
 });
+
+
+
+
