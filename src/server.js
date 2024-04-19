@@ -41,24 +41,23 @@ app.post("/upload", upload.array("files[]"), async (req, res) => {
       return pdfParse(dataBuffer).then((result) => result.text); // Extract text
     });
 
-    // Wait for all PDFs to be parsed
     const parsedTexts = await Promise.all(resumeTextPromises);
 
     const savedResumes = await Promise.all(parsedTexts.map(async (text) => {
-      const nameMatch = text.match(/(?<=Name: ).*/);
-      const emailMatch = text.match(/(?<=Email: ).*/);
-      const phoneMatch = text.match(/(?<=Phone: ).*/);
+      // Tokenize the parsed text. This example simply splits by whitespace, which may need refinement.
+      const tokens = text.split(/\s+/);
     
-      const fullName = nameMatch ? nameMatch[0] : "Unknown";
-      const email = emailMatch ? emailMatch[0] : "noemail@example.com";
-      const phone = phoneMatch ? phoneMatch[0] : "No phone provided";
+      let fullName = tokens[0] + ' ' + tokens[1];
+      let email = tokens.find(token => token.includes('@'));
+    
+      console.log(`Name: ${fullName}`);
+      console.log(`Email: ${email}`);
     
       return prisma.resume.create({
         data: {
           resumeText: text,
           fullName: fullName,
           email: email,
-          phone: phone, 
         },
       });
     }));

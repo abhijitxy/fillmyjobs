@@ -13,10 +13,9 @@ const puppeteer = require("puppeteer");
       visible: true,
     });
     await page.type('#first_name', 'Abhijit');
-    // await page.type(
-    //   'input[name="job_application[email]"]',
-    //   "your.roya51788@gmail.com"
-    // );
+    await page.type(
+      '#email', 'roya51788@gmail.com'
+    );
     
     // Wait for confirmation or any other relevant action
     await page.waitForNavigation();
