@@ -44,17 +44,13 @@ app.post("/upload", upload.array("files[]"), async (req, res) => {
     // Wait for all PDFs to be parsed
     const parsedTexts = await Promise.all(resumeTextPromises);
 
-    // Process each parsedText for name, email, and phone, then save to the database
     const savedResumes = await Promise.all(parsedTexts.map(async (text) => {
       const nameMatch = text.match(/(?<=Name: ).*/);
       const emailMatch = text.match(/(?<=Email: ).*/);
       const phoneMatch = text.match(/(?<=Phone: ).*/);
     
-      // Provide a default value for fullName if it's not found
       const fullName = nameMatch ? nameMatch[0] : "Unknown";
-      // Provide a default value for email if it's not found
       const email = emailMatch ? emailMatch[0] : "noemail@example.com";
-      // Provide a default value for phone if it's not found
       const phone = phoneMatch ? phoneMatch[0] : "No phone provided";
     
       return prisma.resume.create({
