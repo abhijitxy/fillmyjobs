@@ -10,8 +10,7 @@ datasource db {
 model Resume {
   id          Int      @id @default(autoincrement())
   fullName    String   
-  email       String  
-  phone       String  
+  email       String   
   resumeText  String  
   createdAt   DateTime @default(now()) 
   updatedAt   DateTime @updatedAt 
