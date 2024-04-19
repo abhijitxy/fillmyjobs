@@ -1,23 +1,33 @@
 const puppeteer = require("puppeteer");
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
+// Fetch data from the database
+const getData = async () => {
+  const data = await prisma.resume.findFirst({
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+  return data;
+};
+
 
 (async () => {
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
 
-    // Navigate to the job application page
+    const data = await getData();
     await page.goto("https://boards.greenhouse.io/triparc/jobs/4351915007?ref=crackeddevs.com");
 
-    // Fill out the form
     await page.waitForSelector('input[name="job_application[first_name]"]', {
       visible: true,
     });
-    await page.type('#first_name', 'Abhijit');
-    await page.type(
-      '#email', 'roya51788@gmail.com'
-    );
+    await page.type('#first_name', data.fullName); 
+    await page.type('#email', data.email); 
     
-    // Wait for confirmation or any other relevant action
     await page.waitForNavigation();
 
     // Close the browser
