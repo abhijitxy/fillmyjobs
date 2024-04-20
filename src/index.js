@@ -26,7 +26,10 @@ const getData = async () => {
       visible: true,
     });
     await page.type('#first_name', data.fullName); 
+    await page.type('#last_name', data.fullName); 
     await page.type('#email', data.email); 
+    await page.type('#phone', data.phone); 
+    
     
     await page.waitForNavigation();
 

@@ -47,20 +47,36 @@ app.post("/upload", upload.array("files[]"), async (req, res) => {
       // Tokenize the parsed text. This example simply splits by whitespace, which may need refinement.
       const tokens = text.split(/\s+/);
     
-      let fullName = tokens[0] + ' ' + tokens[1];
+      let fullName = tokens[0] + ' ' + tokens[1]; // Simplified example, might need more sophisticated logic
       let email = tokens.find(token => token.includes('@'));
-    
+      let linkedIn = tokens.find(token => token.includes('linkedin.com/in/'));
+      let github = tokens.find(token => token.includes('github.com/'));
+
+      // Add phone number extraction
+      // This regex matches several phone number formats, adjust as necessary
+      const phoneRegex = /Mobile:\s*\+?\d{1,3}-\d{3}-\d{4}-\d{3}/;
+      const phoneMatch = text.match(phoneRegex);
+      let phone = phoneMatch ? phoneMatch[0].replace('Mobile: ', '') : null; 
+
+      // Logging extracted information
       console.log(`Name: ${fullName}`);
       console.log(`Email: ${email}`);
+      console.log(`LinkedIn: ${linkedIn}`);
+      console.log(`GitHub: ${github}`);
+      console.log(`Phone: ${phone}`);
     
       return prisma.resume.create({
         data: {
           resumeText: text,
           fullName: fullName,
           email: email,
+          linkedIn: linkedIn,
+          github: github,
+          phone: phone, 
         },
       });
     }));
+
 
     res.json({
       message: "Successfully uploaded, parsed, and saved resumes",
