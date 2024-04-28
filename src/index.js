@@ -39,3 +39,4 @@ const getData = async () => {
     console.error("Error occurred:", error);
   }
 })();
+

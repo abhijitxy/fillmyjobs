@@ -2,7 +2,9 @@
   "manifest_version": 3,
   "name": "Resume Parser Extension",
   "version": "1.0.0",
-  "permissions": ["activeTab"],
+  "permissions": [
+    "activeTab"
+  ],
   "description": "Upload resumes, parse with ChatGPT-4 Vision, and autofill job applications",
   "icons": {
     "48": "logo.jpeg"
@@ -11,5 +13,11 @@
     "default_popup": "public/popup.html",
     "default_width": 600,
     "default_height": 400
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://boards.greenhouse.io/triparc/jobs/4351915007?ref=crackeddevs.com"],
+      "js": ["public/content.js"]
+    }
+  ]
 }

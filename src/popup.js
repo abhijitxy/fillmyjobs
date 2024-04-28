@@ -40,3 +40,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Upload button not found');
     }
 });
+
